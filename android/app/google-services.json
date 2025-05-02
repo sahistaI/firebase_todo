@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "727559699717",
+    "project_id": "doctro-patient-app",
+    "storage_bucket": "doctro-patient-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:727559699717:android:aeffbb388cf5e5a34d4b6c",
+        "android_client_info": {
+          "package_name": "com.example.ff_firetodo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOt94aW5GZqMQD44FdY8TAVWy-6GT6crc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:727559699717:android:d656e8e73f11feb34d4b6c",
+        "android_client_info": {
+          "package_name": "com.example.fire_todo_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOt94aW5GZqMQD44FdY8TAVWy-6GT6crc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
