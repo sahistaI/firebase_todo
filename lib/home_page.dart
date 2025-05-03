@@ -1,21 +1,42 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ff_firetodo/app_widget/outline_custom_btn.dart';
 import 'package:ff_firetodo/firebase_repo/firebase_repository.dart';
+import 'package:ff_firetodo/login_page.dart';
 import 'package:ff_firetodo/utils/util_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'domain/model/todo_model.dart';
 
 class Homepage extends StatefulWidget{
+
 
   @override
   State<Homepage> createState() => _HomepageState();
 }
 
 class _HomepageState extends State<Homepage> {
+
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getUID();
+  }
+
+  void getUID()async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.getString("UID");
+    setState(() {
+
+    });
+  }
+
   var titleController = TextEditingController();
 
   var descController = TextEditingController();
@@ -30,14 +51,31 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
    return Scaffold(
      appBar: AppBar(
-       title: RichText(
-         text: TextSpan(
-           text: "ToDO ",style: mTextStyleBold18(),
-           children: [
-             TextSpan(text: "Manager",style: mTextStyleBold18(mColor: Colors.blue))
-           ]
-         ),
-       ),
+       title:
+           Row(
+             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+             children: [
+               RichText(
+                 textAlign: TextAlign.start,
+                 text: TextSpan(
+                   text:"ToDO ",style: mTextStyleBold18(),
+                   children: [
+                     TextSpan(text: "Manager",style: mTextStyleBold18(mColor: Colors.blue))
+                   ]
+                 ),
+               ),
+               InkWell(
+                   onTap: ()async{
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  prefs.remove("UID");
+
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+                   },
+
+                   child: Icon(Icons.logout_outlined,size: 30,)),
+             ],
+           ),
+
      ),
      body: Padding(
        padding: const EdgeInsets.all(8.0),
@@ -131,7 +169,7 @@ class _HomepageState extends State<Homepage> {
                                      width: 2
                                  ),
                                  value: listTodo[index].isCompleted,
-                                 onChanged: (value){
+                                 onChanged: listTodo[index].isCompleted==true ? null : (value){
 
                                    if(listTodo[index].todoId !=null){
 
@@ -176,7 +214,7 @@ class _HomepageState extends State<Homepage> {
                                    ],
                                  ),
                                ),
-                              completedTime != "" ?   Padding(
+                             listTodo[index].isCompleted == true && completedTime != "" ?   Padding(
                                  padding: const EdgeInsets.only(left: 16.0,right: 16.0,bottom: 11.0),
                                  child: Row(
                                    children: [
